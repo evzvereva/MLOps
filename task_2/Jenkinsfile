@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Подготовка') {
+            steps {
+                dir('task_2') {
+                    sh '''python3 -m venv .venv
+                    . .venv/bin/activate
+                    pip install -r ./requirements.txt'''
+                }
+            }
+        }
+
+        stage('Создание случайного набора пациентов с их показателями. В результате данные разделены на тестовую и обучающую выборку, сохраняются файлы в директории train и test.') {
+            steps {
+                dir('task_2') {
+                    sh '''. .venv/bin/activate
+                    python3 ./data_creation.py'''
+                }
+            }
+        }
+
+        stage('Выполнение предобработки данных с помощью sklearn.preprocessing.StandardScaler.') {
+            steps {
+                dir('task_2') {
+                    sh '''. .venv/bin/activate
+                    python3 ./data_preprocessing.py'''
+                }
+            }
+        }
+
+        stage('Создание и обучение модели машинного обучения RandomForestClassifier на построенных данных из папки «train».') {
+            steps {
+                dir('task_2') {
+                    sh '''. .venv/bin/activate
+                    python3 ./model_preparation.py'''
+                }
+            }
+        }
+
+        stage('Проверка модели машинного обучения на построенных данных из папки «test».') {
+            steps {
+                dir('task_2') {
+                    sh '''. .venv/bin/activate
+                    python3 ./model_testing.py'''
+                }
+            }
+        }
+    }
+}
