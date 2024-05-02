@@ -5,8 +5,8 @@ pipeline {
         stage('Подготовка') {
             steps {
                 dir('task_2') {
-                    sh '''python3.12 -m venv .venv
-                    source .venv/bin/activate
+                    sh -c '''python3.12 -m venv .venv
+                    . .venv/bin/activate
                     pip install --upgrade pip
                     pip install -r ./requirements.txt'''
                 }
@@ -16,8 +16,7 @@ pipeline {
         stage('Создание случайного набора пациентов с их показателями. В результате данные разделены на тестовую и обучающую выборку, сохраняются файлы в директории train и test.') {
             steps {
                 dir('task_2') {
-                    sh '''source .venv/bin/activate
-                    python3 ./data_creation.py'''
+                    sh -c '''. .venv/bin/activate && python3.12 ./data_creation.py'''
                 }
             }
         }
@@ -25,7 +24,7 @@ pipeline {
         stage('Выполнение предобработки данных с помощью sklearn.preprocessing.StandardScaler.') {
             steps {
                 dir('task_2') {
-                    sh '''source .venv/bin/activate
+                    sh -c '''source .venv/bin/activate
                     python3 ./data_preprocessing.py'''
                 }
             }
@@ -34,7 +33,7 @@ pipeline {
         stage('Создание и обучение модели машинного обучения RandomForestClassifier на построенных данных из папки «train».') {
             steps {
                 dir('task_2') {
-                    sh '''source .venv/bin/activate
+                    sh -c '''source .venv/bin/activate
                     python3 ./model_preparation.py'''
                 }
             }
@@ -43,7 +42,7 @@ pipeline {
         stage('Проверка модели машинного обучения на построенных данных из папки «test».') {
             steps {
                 dir('task_2') {
-                    sh '''source .venv/bin/activate
+                    sh -c '''source .venv/bin/activate
                     python3 ./model_testing.py'''
                 }
             }
