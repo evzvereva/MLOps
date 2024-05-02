@@ -24,8 +24,7 @@ pipeline {
         stage('Выполнение предобработки данных с помощью sklearn.preprocessing.StandardScaler.') {
             steps {
                 dir('task_2') {
-                    sh '''. .venv/bin/activate
-                    python3 ./model_preprocessing.py'''
+                    sh '''. .venv/bin/activate && python3.12 ./model_preprocessing.py'''
                 }
             }
         }
@@ -33,8 +32,7 @@ pipeline {
         stage('Создание и обучение модели машинного обучения RandomForestClassifier на построенных данных из папки «train».') {
             steps {
                 dir('task_2') {
-                    sh '''. .venv/bin/activate
-                    python3 ./model_preparation.py'''
+                    sh '''. .venv/bin/activate && python3.12 ./model_preparation.py'''
                 }
             }
         }
@@ -42,8 +40,7 @@ pipeline {
         stage('Проверка модели машинного обучения на построенных данных из папки «test».') {
             steps {
                 dir('task_2') {
-                    sh '''. .venv/bin/activate
-                    python3 ./model_testing.py'''
+                    sh '''. .venv/bin/activate && python3.12 ./model_testing.py'''
                 }
             }
         }
