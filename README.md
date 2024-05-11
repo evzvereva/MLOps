@@ -86,3 +86,31 @@ docker-compose up
 docker pull evzvereva/task_3
 ```
 </details>
+
+<details><summary><b>task_4</b></summary>
+
+В директории datasets:
+1. titanic.py позволяет получить данные о пассажирах «Титаника» и сохранить в файл titanic.csv.
+2. update_nan_age_titanic.py создает новую версию датасета, в котором пропущенные (nan) значения в поле "Age" будут заполнены средним значением.
+3. one_hot_encod_sex_titanic.py создает новый признак "Sex_enc" с использованием one-hot-encoding для строкового признака "Пол" (“Sex”)
+4. Техническая информация:
+   - Коммиты:
+   ```
+   (.venv) evzvereva@Ubuntu:~/PycharmProjects/MLOps/task_4$ git log --oneline
+   15edda3 (HEAD -> task-4) Update datasets.dvc
+   02fc6db Add replace nan in column "Age" on mean value and new column "Sex_enc"
+   8525c86 Google Disk add remote datasets folder
+   26d09dc Put datasets under control
+   959bb22 Init dvc
+   ```
+   - Мереключение между версиями на примере следующего коммита:
+   ```
+   git checkout 15edda3
+   dvc pull   
+   ```
+   - Возвращение к актуальной версии:
+   ```
+   git checkout task-4
+   dvc pull
+   ```
+</details>
