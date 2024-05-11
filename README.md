@@ -95,17 +95,17 @@ docker pull evzvereva/task_3
 3. one_hot_encod_sex_titanic.py создает новый признак "Sex_enc" с использованием one-hot-encoding для строкового признака "Пол" (“Sex”)
 4. Техническая информация:
    - Коммиты:
-   ```
-   (.venv) evzvereva@Ubuntu:~/PycharmProjects/MLOps/task_4$ git log --oneline
+   ```(.venv) evzvereva@Ubuntu:~/PycharmProjects/MLOps/task_4$ git log --oneline
    15edda3 (HEAD -> task-4) Update datasets.dvc
    02fc6db Add replace nan in column "Age" on mean value and new column "Sex_enc"
    8525c86 Google Disk add remote datasets folder
    26d09dc Put datasets under control
    959bb22 Init dvc
    ```
-   - Мереключение между версиями на примере следующего коммита:
-   ```
+   - Мереключение между версиями и сохранение измененийЖ
+   ```commandline
    git checkout 15edda3
+   
    dvc pull   
    ```
    - Возвращение к актуальной версии:
